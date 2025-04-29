@@ -1,0 +1,19 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+:root {
+  --ui-primary: var(--color-teal-700);
+}
+
+.dark {
+  --ui-bg: var(--color-zinc-900);
+  --ui-bg-muted: var(--color-zinc-800);
+  --ui-bg-elevated: var(--color-zinc-800);
+  --ui-bg-accented: var(--color-zinc-700);
+  --ui-bg-inverted: var(--color-white);
+
+  --ui-border: var(--color-zinc-800);
+  --ui-border-muted: var(--color-zinc-700);
+  --ui-border-accented: var(--color-zinc-700);
+  --ui-border-inverted: var(--color-white);
+}
