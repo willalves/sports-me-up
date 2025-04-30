@@ -19,7 +19,7 @@ const closeMenu = () => {
   <header
     class="sticky top-0 z-50 glass-effect border-b border-neutral-200 dark:border-neutral-800 transition-all duration-300 shadow-sm backdrop-blur-md"
   >
-    <div class="container mx-auto px-4 md:px-6">
+    <UContainer class="mx-auto px-4 md:px-6">
       <div class="flex items-center justify-between py-4">
         <!-- Logo -->
         <div class="flex items-center">
@@ -74,12 +74,14 @@ const closeMenu = () => {
 
           <UButton
             :icon="'i-lucide-menu'"
-            class="bg-primary-500 active:bg-primary-600 dark:text-neutral-300 focus:outline-none"
+            variant="outline"
+            color="neutral"
+            class="focus:outline-none"
             @click="toggleMenu"
           />
         </div>
       </div>
-    </div>
+    </UContainer>
 
     <!-- Mobile Menu -->
     <div

@@ -19,7 +19,7 @@ const selectedSize = logoClasses[props.size as keyof typeof logoClasses] || logo
   <div :class="['font-bold', selectedSize, 'flex items-center']">
     <UIcon
       name="i-lucide-volleyball"
-      class="mr-1 animate-spin"
+      class="mr-1"
     />
     <span class="text-primary-600 dark:text-primary-500">Sports</span>
     <span class="text-neutral-900 dark:text-white">Me</span>
