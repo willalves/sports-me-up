@@ -14,11 +14,12 @@ onMounted(async () => {
   <div class="page-wrapper">
     <HeroSection class="mb-8" />
     <BrowseSportSection class="mb-8" />
-    <UpcomingEvents
+    <UpcomingEventsSection
       :upcoming-events
       :is-loading
       class="mb-8"
     />
+    <HowItWorksSection class="mb-8" />
   </div>
 </template>
 
