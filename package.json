@@ -29,5 +29,7 @@
     "vue-tsc": "^2.2.10",
     "wrangler": "^4.12.1"
   },
-  "packageManager": "npm@10.5.2"
+  "engines": {
+    "node": "20.x"
+  }
 }
