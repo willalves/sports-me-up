@@ -20,6 +20,7 @@ onMounted(async () => {
       class="mb-8"
     />
     <HowItWorksSection class="mb-8" />
+    <ReadyToJoinSection />
   </div>
 </template>
 
