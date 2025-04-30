@@ -5,7 +5,7 @@ import { navigation } from "~/config/navigation";
 
 <template>
   <footer class="border-t border-neutral-200 dark:border-neutral-800">
-    <UContainer class="mx-auto px-4 py-12 md:py-16">
+    <UContainer class="mx-auto px-4 pt-10 pb-6">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
         <div class="space-y-2">
           <AppLogo />
@@ -58,7 +58,7 @@ import { navigation } from "~/config/navigation";
         </div>
       </div>
 
-      <div class="mt-12 pt-8 border-t border-neutral-200 dark:border-neutral-800 text-center text-neutral-600 dark:text-neutral-400 text-sm">
+      <div class="mt-8 pt-8 border-t border-neutral-200 dark:border-neutral-800 text-center text-neutral-600 dark:text-neutral-400 text-sm">
         <p>&copy; {{ new Date().getFullYear() }} <span class="text-primary-500">SportsMeUp</span>. All rights reserved.</p>
       </div>
     </UContainer>

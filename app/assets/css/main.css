@@ -1,6 +1,2 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
-
-.page-wrapper {
-  @apply mt-10;
-}
