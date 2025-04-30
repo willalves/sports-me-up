@@ -1,6 +1,6 @@
 <template>
   <section class="py-16 md:py-24 bg-gradient-to-br from-primary-200 via-white to-neutral-50 dark:from-primary-900/30 dark:via-neutral-900 dark:to-neutral-950">
-    <div class="container mx-auto px-4 md:px-6">
+    <UContainer class="mx-auto px-4 md:px-6">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         <div class="space-y-6 animate-fade-in">
           <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900 dark:text-white">
@@ -17,7 +17,10 @@
             >
               Find Events
             </UButton>
-            <NuxtLink to="/register" class="bg-neutral-700 hover:bg-neutral-600 rounded-full text-white px-4 py-2 font-semibold transition">
+            <NuxtLink
+              to="/register"
+              class="bg-neutral-700 hover:bg-neutral-600 rounded-full text-white px-4 py-2 font-semibold transition"
+            >
               Sign Up
             </NuxtLink>
           </div>
@@ -32,6 +35,6 @@
           >
         </div>
       </div>
-    </div>
+    </UContainer>
   </section>
 </template>

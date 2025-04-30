@@ -1,23 +1,23 @@
 <script setup lang="ts">
-import ColorModeButton from "./ColorModeButton.vue";
-import AppLogo from "./ui/AppLogo.vue";
+import ColorModeButton from "@/components/ColorModeButton.vue";
+import AppLogo from "@/components/ui/AppLogo.vue";
 import { navigation } from "@/config/navigation";
 
 const isMenuOpen = ref(false);
 const isLoggedIn = ref(false);
 
 const toggleMenu = () => {
-  isMenuOpen.value = !isMenuOpen.value
+  isMenuOpen.value = !isMenuOpen.value;
 };
 
 const closeMenu = () => {
-  isMenuOpen.value = false
+  isMenuOpen.value = false;
 };
 </script>
 
 <template>
   <header
-    class="sticky top-0 z-50 glass-effect border-b border-neutral-200 dark:border-neutral-800 transition-all duration-300 shadow-sm backdrop-blur-md"
+    class="sticky top-0 z-50 glass-effect border-b border-neutral-200 dark:border-neutral-800 transition-all duration-300 shadow-sm backdrop-blur-xl"
   >
     <UContainer class="mx-auto px-4 md:px-6">
       <div class="flex items-center justify-between py-4">

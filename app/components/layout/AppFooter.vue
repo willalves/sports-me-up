@@ -15,25 +15,16 @@ import { navigation } from "~/config/navigation";
         </div>
 
         <div>
-          <h4 class="font-semibold text-lg mb-4">Quick Links</h4>
+          <h4 class="font-semibold text-lg mb-4">
+            Quick Links
+          </h4>
           <ul class="space-y-2">
-            <li v-for="item in navigation.unauthenticated" :key="item.name">
+            <li
+              v-for="item in navigation.unauthenticated"
+              :key="item.name"
+            >
               <NuxtLink
                 :to="item.route"
-                class="text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 text-sm"
-              >
-                {{  item.name }}
-              </NuxtLink>
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <h4 class="font-semibold text-lg mb-4">Sports</h4>
-          <ul class="space-y-2">
-            <li v-for="item in navigation.footerNavigation.sports" :key="item.name">
-              <NuxtLink 
-                :to="{ path: item.route, query: { sport: item.query } }" 
                 class="text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 text-sm"
               >
                 {{ item.name }}
@@ -43,14 +34,39 @@ import { navigation } from "~/config/navigation";
         </div>
 
         <div>
-          <h4 class="font-semibold text-lg mb-4">Contact</h4>
+          <h4 class="font-semibold text-lg mb-4">
+            Sports
+          </h4>
+          <ul class="space-y-2">
+            <li
+              v-for="item in navigation.footerNavigation.sports"
+              :key="item.name"
+            >
+              <NuxtLink
+                :to="{ path: item.route, query: { sport: item.query } }"
+                class="text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 text-sm"
+              >
+                {{ item.name }}
+              </NuxtLink>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-semibold text-lg mb-4">
+            Contact
+          </h4>
           <ul class="space-y-2">
             <li
               v-for="item in navigation.footerNavigation.contact"
               :key="item.name"
               class="text-neutral-600 dark:text-neutral-400 text-sm"
             >
-              <NuxtLink :to="item.route" external class="hover:text-primary-600 dark:hover:text-primary-400">
+              <NuxtLink
+                :to="item.route"
+                external
+                class="hover:text-primary-600 dark:hover:text-primary-400"
+              >
                 {{ item.name }}
               </NuxtLink>
             </li>
