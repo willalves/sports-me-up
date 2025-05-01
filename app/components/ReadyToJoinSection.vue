@@ -11,7 +11,7 @@
         <UButton
           to="/register"
           size="lg"
-          class="rounded-full !text-primary-600 !bg-white hover:!bg-accented transition"
+          class="rounded-full !text-primary-600 !bg-white hover:!bg-neutral-300 transition"
         >
           Sign Up Now
         </UButton>

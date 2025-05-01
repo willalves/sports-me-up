@@ -34,6 +34,20 @@ export interface Event {
   imageUrl?: string;
 }
 
+export interface EventFilters {
+  sportType?: string;
+  location?: string;
+  date?: string | null;
+  skillLevel?: string;
+  status?: string;
+}
+
+export interface ApiResponse<T> {
+  data: T;
+  message: string;
+  success: boolean;
+}
+
 export interface SportType {
   id: string;
   name: string;

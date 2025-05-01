@@ -11,21 +11,6 @@ const sportIcon = computed(() => getSportIcon(props.event.sportType));
 const spotsText = computed(() => getSpotText(props.event.maxParticipants, props.event.currentParticipants));
 const shortDescription = computed(() => truncateText(props.event.description, 120));
 
-const statusClass = computed(() => {
-  switch (props.event.status) {
-    case "upcoming":
-      return "bg-accent-50 text-accent-700 dark:bg-accent-700/20 dark:text-accent-400";
-    case "ongoing":
-      return "bg-success-50 text-success-700 dark:bg-success-700/20 dark:text-success-400";
-    case "completed":
-      return "bg-neutral-100 text-neutral-700 dark:bg-neutral-700/20 dark:text-neutral-400";
-    case "cancelled":
-      return "bg-error-50 text-error-700 dark:bg-error-700/20 dark:text-error-400";
-    default:
-      return "bg-accent-50 text-accent-700 dark:bg-accent-700/20 dark:text-accent-400";
-  }
-});
-
 const spotsBadgeClass = computed(() => {
   const spotsLeft = props.event.maxParticipants - props.event.currentParticipants;
   if (spotsLeft === 0) {
@@ -61,7 +46,7 @@ const spotsBadgeClass = computed(() => {
 
         <!-- Status Badge -->
         <div class="absolute top-3 right-3">
-          <span :class="[statusClass, 'inline-block px-3 py-2 text-neutral-50 text-xs font-medium rounded-full bg-neutral-800']">
+          <span class="inline-block px-3 py-2 text-neutral-50 text-xs font-medium rounded-full bg-primary-700">
             {{ event.status.charAt(0).toUpperCase() + event.status.slice(1) }}
           </span>
         </div>

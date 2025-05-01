@@ -161,7 +161,7 @@ const mockEvents: Event[] = [
     id: "6",
     title: "Futsal Match",
     description: "Join us for a friendly 5v5 soccer match. All skill levels welcome!",
-    sportType: "futsal",
+    sportType: "soccer",
     date: "2025-06-14",
     time: "9:00",
     duration: 60,
