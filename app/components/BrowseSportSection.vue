@@ -27,7 +27,7 @@ const popularSports: SportType[] = [
         <NuxtLink
           v-for="sport in popularSports"
           :key="sport.id"
-          :to="{ path: '/events', query: { sport: sport.name } }"
+          :to="{ path: '/events', query: { sport: sport.name.toLocaleLowerCase() } }"
           class="flex flex-col items-center py-8 bg-muted hover:bg-neutral-50 dark:hover:bg-neutral-900 border border-transparent hover:border-muted shadow-md hover:shadow-xl rounded-lg transition duration-150 ease-in-out transform hover:scale-103"
         >
           <span class="text-4xl mb-4">{{ sport.icon }}</span>

@@ -12,17 +12,20 @@
           </p>
           <div class="flex flex-wrap gap-4 pt-4">
             <UButton
+              to="/events"
               size="xl"
               class="rounded-full font-semibold"
             >
               Find Events
             </UButton>
-            <NuxtLink
+            <UButton
               to="/register"
+              size="xl"
+              color="neutral"
               class="bg-neutral-700 hover:bg-neutral-600 rounded-full text-white px-4 py-2 font-semibold transition"
             >
               Sign Up
-            </NuxtLink>
+            </UButton>
           </div>
         </div>
         <div class="hidden md:block relative h-auto">

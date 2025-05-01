@@ -23,6 +23,32 @@ export const formatDateTime = (date: string, time: string): string => {
   return `${formattedDate} at ${formatTime(time)}`;
 };
 
+export const allSportTypes = [
+  "all",
+  "soccer",
+  "basketball",
+  "baseball",
+  "tennis",
+  "volleyball",
+  "football",
+  "running",
+  "cycling",
+  "swimming",
+  "golf",
+  "hockey",
+  "table tennis",
+  "badminton",
+  "boxing",
+  "cricket",
+  "rugby",
+  "skiing",
+  "martial arts",
+  "yoga",
+  "hiking",
+  "surfing",
+  "skateboarding"
+];
+
 export const getSportIcon = (sportType: string): string => {
   const sportIcons: Record<string, string> = {
     "soccer": "⚽",

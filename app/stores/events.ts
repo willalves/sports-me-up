@@ -1,43 +1,32 @@
+import { defineStore } from "pinia";
 import type { Event, EventFilters } from "@/types";
-import { eventsService } from "@/services/events.service";
+import { getEvents } from "@/services/events.service";
+
+function normalizeString(str: string = ""): string {
+  return str.trim().toLowerCase();
+}
 
 export const useEventsStore = defineStore("events", () => {
   const events = ref<Event[]>([]);
   const isLoading = ref(false);
   const error = ref<string | null>(null);
-  const currentFilters = ref<EventFilters>({
+
+  const filters = ref<EventFilters>({
     sportType: "",
     location: "",
     date: null
   });
 
   const filteredEvents = computed(() => {
-    let result = [...events.value];
+    return events.value.filter((event) => {
+      const matchesSport = !filters.value.sportType || normalizeString(event.sportType) === normalizeString(filters.value.sportType);
 
-    if (currentFilters.value.sportType) {
-      result = result.filter(
-        event =>
-          event.sportType.toLowerCase() === currentFilters.value.sportType?.toLowerCase()
-      );
-    }
+      const matchesLocation = !filters.value.location || normalizeString(event.location).includes(normalizeString(filters.value.location));
 
-    if (currentFilters.value.location) {
-      result = result.filter(event =>
-        event.location
-          .toLowerCase()
-          .includes(currentFilters.value.location?.toLowerCase() || "")
-      );
-    }
+      const matchesDate = !filters.value.date || new Date(event.date).toDateString() === new Date(filters.value.date).toDateString();
 
-    if (currentFilters.value.date) {
-      const filterDate = new Date(currentFilters.value.date);
-      result = result.filter((event) => {
-        const eventDate = new Date(event.date);
-        return eventDate.toDateString() === filterDate.toDateString();
-      });
-    }
-
-    return result;
+      return matchesSport && matchesLocation && matchesDate;
+    });
   });
 
   const upcomingEvents = computed(() => {
@@ -53,25 +42,21 @@ export const useEventsStore = defineStore("events", () => {
     error.value = null;
 
     try {
-      const data = await eventsService.getEvents();
+      const data = await getEvents();
       events.value = data;
     } catch (err: unknown) {
-      if (err instanceof Error) {
-        error.value = err.message;
-      } else {
-        error.value = "Failed to fetch events";
-      }
+      error.value = err instanceof Error ? err.message : "Failed to fetch events";
     } finally {
       isLoading.value = false;
     }
   };
 
-  const setFilters = (filters: EventFilters) => {
-    currentFilters.value = filters;
+  const setFilters = (newFilters: Partial<EventFilters>) => {
+    filters.value = { ...filters.value, ...newFilters };
   };
 
   const resetFilters = () => {
-    currentFilters.value = {
+    filters.value = {
       sportType: "",
       location: "",
       date: null
@@ -82,9 +67,10 @@ export const useEventsStore = defineStore("events", () => {
     events,
     isLoading,
     error,
-    upcomingEvents,
+    filters,
     fetchEvents,
     filteredEvents,
+    upcomingEvents,
     setFilters,
     resetFilters
   };

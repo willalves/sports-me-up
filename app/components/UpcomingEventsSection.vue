@@ -2,7 +2,7 @@
 import EventCard from "@/components/events/EventCard.vue";
 import type { Event } from "@/types";
 
-const props = defineProps({
+defineProps({
   upcomingEvents: {
     type: Array as () => Event[],
     default: () => []
@@ -12,8 +12,6 @@ const props = defineProps({
     default: false
   }
 });
-
-console.log("UpcomingEvents props:", props.upcomingEvents);
 </script>
 
 <template>
@@ -53,7 +51,7 @@ console.log("UpcomingEvents props:", props.upcomingEvents);
         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
       >
         <EventCard
-          v-for="event in upcomingEvents"
+          v-for="event in upcomingEvents.slice(0, 3)"
           :key="event.id"
           :event="event"
         />

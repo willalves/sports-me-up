@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import { ref, computed, onMounted, watch } from "vue";
+import { useRoute } from "vue-router";
 import { format } from "date-fns";
-import type { SelectItem } from "@nuxt/ui";
 import { useEventsStore } from "@/stores/events";
-import { getSportIcon } from "@/utils/helpers";
+import { allSportTypes, getSportIcon } from "@/utils/helpers";
 import EventCard from "@/components/events/EventCard.vue";
 
 const route = useRoute();
@@ -10,82 +11,62 @@ const eventsStore = useEventsStore();
 const { filteredEvents, isLoading } = storeToRefs(eventsStore);
 const { fetchEvents, setFilters, resetFilters } = eventsStore;
 
-const sportTypes = ref([
-  {
-    label: "All Sports",
-    value: "all"
-  },
-  {
-    label: `${getSportIcon("soccer")} Soccer`,
-    value: "soccer"
-  },
-  {
-    label: `${getSportIcon("basketball")} Basketball`,
-    value: "basketball"
-  },
-  {
-    label: `${getSportIcon("tennis")} Tennis`,
-    value: "tennis"
-  },
-  {
-    label: `${getSportIcon("baseball")} Baseball`,
-    value: "baseball"
-  },
-  {
-    label: `${getSportIcon("hockey")} Hockey`,
-    value: "hockey"
-  },
-  {
-    label: `${getSportIcon("golf")} Golf`,
-    value: "golf"
-  }
-] satisfies SelectItem []);
+// Available sport types for filter
+const sportTypes = computed(() =>
+  allSportTypes.map(sport => ({
+    label: `${getSportIcon(sport)} ${sport.charAt(0).toUpperCase() + sport.slice(1)}`,
+    value: sport
+  }))
+);
 
-const selectedSport = ref("all");
+// Filter state
+const selectedSport = ref(sportTypes.value[0]);
 const searchLocation = ref("");
 const selectedDate = ref("");
 
-// Initialize filters from query params
-onMounted(async () => {
-  if (route.query.sport) {
-    selectedSport.value = route.query.sport as string;
-  }
-
-  await fetchEvents();
-
-  // Apply filters
-  applyFilters();
-});
-
-watch(() => route.query, (newQuery) => {
-  if (newQuery.sport) {
-    selectedSport.value = newQuery.sport as string;
-    applyFilters();
-  }
-});
-
+// Normalize and apply filters
 const applyFilters = () => {
+  const sport = selectedSport.value?.value === "all" ? "" : selectedSport.value?.value;
   setFilters({
-    sportType: selectedSport.value === "all" ? "" : selectedSport.value,
+    sportType: sport,
     location: searchLocation.value,
     date: selectedDate.value
   });
 };
 
 const resetCurrentFilters = () => {
-  selectedSport.value = "all";
+  selectedSport.value = sportTypes.value[0];
   searchLocation.value = "";
   selectedDate.value = "";
   resetFilters();
 };
 
-const hasFilters = computed(() => selectedSport.value || searchLocation.value || selectedDate.value);
+const hasFilters = computed(() =>
+  selectedSport.value?.value !== "all" || searchLocation.value || selectedDate.value
+);
 
-// Format date for display
-const formatDateForDisplay = (dateString: string): string => {
-  if (!dateString) return "";
-  return format(new Date(dateString), "MMMM d, yyyy");
+// Format date string for display
+const formatDateForDisplay = (dateString: string): string =>
+  dateString ? format(new Date(dateString), "MMMM d, yyyy") : "";
+
+// Sync filters with query params
+const initializeFiltersFromRoute = () => {
+  const querySport = route.query.sport as string | undefined;
+  if (querySport) {
+    selectedSport.value = sportTypes.value.find(s => s.value === querySport) || sportTypes.value[0];
+  }
 };
+
+onMounted(async () => {
+  initializeFiltersFromRoute();
+  await fetchEvents();
+  applyFilters();
+});
+
+watch(() => route.query, () => {
+  initializeFiltersFromRoute();
+  applyFilters();
+});
 </script>
 
 <template>
@@ -114,7 +95,7 @@ const formatDateForDisplay = (dateString: string): string => {
             >
               Sport Type
             </label>
-            <USelect
+            <USelectMenu
               id="sportType"
               v-model="selectedSport"
               :items="sportTypes"
@@ -194,15 +175,15 @@ const formatDateForDisplay = (dateString: string): string => {
           class="mb-6 flex flex-wrap gap-2 capitalize"
         >
           <UBadge
-            v-if="selectedSport && selectedSport !== 'all'"
+            v-if="selectedSport && selectedSport.value !== 'all'"
             trailing-icon="i-lucide-x"
             size="lg"
             variant="soft"
             color="primary"
             class="cursor-pointer"
-            @click="selectedSport = 'all'; applyFilters()"
+            @click="selectedSport = sportTypes[0]; applyFilters()"
           >
-            {{ selectedSport }}
+            {{ selectedSport.label }}
           </UBadge>
 
           <UBadge
